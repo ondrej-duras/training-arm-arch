@@ -5,6 +5,9 @@
 *.gz
 .*
 
+# object files
+*.o
+
 # Vagrant stuff
 acceptance_config.yml
 boxes/*
