@@ -1,0 +1,32 @@
+# Emulation of micro:bit v2
+# 20260924, Ondrej DURAS +GoogleAI GNU/GPLv2
+
+# 1. empty emulation platform
+using sysbus
+mach create "microbit-v2-1"
+
+# 2. Load the definition of hardware nRF52840
+machine LoadPlatformDescription @platforms/cpus/nrf52840.repl
+
+# 3. decreasing memory on fly - chip changes from nRF52840 to nRF52833
+# differences:
+# nRF52833 Flash  512kB Ram 128kB
+# nRF52840 Flash 1024kB Ram 256kB
+sysbus.flash Size 0x80000
+sysbus.ram   Size 0x20000
+
+
+# 4. Loading .ELF binary /our application
+sysbus LoadELF @00A-hello.elf
+
+# 5. Console setup
+# PC, Opcode alebo PCAndOpcode
+# cpu CreateExecutionTracing "tracer" @stdout PC
+# text file where log is going to be written
+cpu CreateExecutionTracing "tracer" @trace.log PC
+
+# names of C functions directly visible in .log file
+sysbus.cpu LogFunctionNames true
+
+# --- end ---
+

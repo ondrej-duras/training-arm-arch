@@ -11,18 +11,18 @@ MEMDEF  = nRF52833.ld
 help:
 	echo "use make all"
 
-all: 001-hello.elf
+all: 00A-hello.elf
 
-001-hello.o: 001-hello.c
-	$(CC) $(CFLAGS) -c 001-hello.c -o 001-hello.o
+00B-hello.o: 001-hello.c
+	$(CC) $(CFLAGS) -c 001-hello.c -o 00B-hello.o
 
-001-hello.elf: 001-hello.o
-	#$(LD) $(LDFLAGS) -T $(MEMDEF) 001-hello.o -o 001-hello.elf
-	$(LD) -T $(MEMDEF) 001-hello.o -o 001-hello.elf
+00A-hello.elf: 00B-hello.o
+	#$(LD) $(LDFLAGS) -T $(MEMDEF) 00A-hello.o -o 00A-hello.elf
+	$(LD) -T $(MEMDEF) 00B-hello.o -o 00A-hello.elf
 
 
 clean:
-	rm -vf 001-hello.o 001-hello.elf
+	rm -vf 00B-hello.o 00A-hello.elf
 
 # --- end ---
 
