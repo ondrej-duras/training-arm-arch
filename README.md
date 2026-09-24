@@ -7,6 +7,6 @@ functional units, periferal devices.
 
 This training is AI supported.
 
-[Hardware inventory](inventory.md)
+[Inventory](inventory.md)
 
 

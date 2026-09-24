@@ -12,7 +12,8 @@
 ## Software Inventory
 
 - VIM (text editor - IDE environment)
-- ARM toolchain (assembler compilarot)
+- GIT (distributed version control system)
+- ARM toolchain (assembler compilator)
 - Renode.IO (Emulator of hardware)
 
 ## Security Exceptions
