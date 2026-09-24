@@ -5,8 +5,9 @@
 *.gz
 .*
 
-# object files
+# object fnd executable iles
 *.o
+*.elf
 
 # Vagrant stuff
 acceptance_config.yml
