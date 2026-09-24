@@ -26,6 +26,8 @@
  *.sh text eol=lf
  *.ini text eol=lf
  *.inc text eol=lf
+ *.resc text eol=lf
+ *.repl text eol=lf
 
  *.scad text eol=lf
  *.pov text eol=lf
