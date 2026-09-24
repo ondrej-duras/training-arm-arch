@@ -1,12 +1,12 @@
 ## Hardware inventory
 
-| Platform  | Chipset | Processor | Archytecture | System |  Used Features | Target Topic |
-|-----------|---------|-----------|--------------|--------|----------------|--------------|
-| micro:bit | nrf52833 | Cortex-M4 | ARM-32      |embed | GPIO LED diodes, buttons, UART | morse telegraph LED+Button |
-| Adafruit Clue | nrf52840 | Cortex-M4 | ARM-32  | embed |GPIO buttons, display 240x240, SPI, I2C, UART, BLE| morse telegraph via BLE |
-| Adafruit PyBadge | ATSAMD51J19 | Cortex-M4F | ARM-32 +FPU | embed| FPU, GPIO 8-buttons, display 160x128, UART, BLE| arkanoid game |
-| RaspBerry Pi 5 1GB | SC2162 | Cortex-A76 | ARM-64 +GPU |linux | MMU, USB, Ethernet, UART-HMI, GPU | arkanoid game, packet generator |
-| routerboard | IPQ4018 | Cortex-A7 | ARM-32 |linux | 5x Gbps Ethernet | packet generator, packet analyzer |
+| Course | Platform  | Chipset | Processor | Archytecture | System |  Used Features / Topics | Target Output |
+|--------|-----------|---------|-----------|--------------|--------|----------------|--------------|
+| 1      | micro:bit | nrf52833 | Cortex-M4 | ARM-32      |embed | ToolChain, Emulator, GPIO LED diodes, buttons, UART | morse telegraph LED+Button |
+| 2      | Adafruit Clue | nrf52840 | Cortex-M4 | ARM-32  | embed |GPIO buttons, display 240x240, SPI, I2C, UART, BLE| morse telegraph via BLE |
+| 3      | Adafruit PyBadge | ATSAMD51J19 | Cortex-M4F | ARM-32 +FPU | embed| FPU, GPIO 8-buttons, display 160x128, UART, BLE| arkanoid game |
+| 4      | RaspBerry Pi 5 1GB | SC2162 | Cortex-A76 | ARM-64 +GPU |linux | MMU, USB, Ethernet, UART-HMI, GPU | arkanoid game, packet generator |
+| 5      | routerboard | IPQ4018 | Cortex-A7 | ARM-32 |linux | 5x Gbps Ethernet | packet generator, packet analyzer |
 
 
 ## Software Inventory
