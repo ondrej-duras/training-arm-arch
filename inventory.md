@@ -24,7 +24,7 @@ So necessary data are following:
 
 |Product Name    |USB Vendor ID |USB Product ID | System Memory            |   Capacity of storage |
 |----------------|--------------|---------------|--------------------------|-----------------------|
-|micro:bit 1/2   |VID=0x0d28    |PID=0x0204     | 128kB RAM                |   512kB               |
+|micro:bit v2    |VID=0x0d28    |PID=0x0204     | 128kB RAM                |   512kB               |
 |Adafruit PyBadge|VID=0x239A    |PID=0x8033     | 5125kB code / 192kB data |   2MB QSPI flash      |
 |Adafruit Clue   |VID=0x239A    |PID=0x0071     | 1 MB code/ 256kB data    |   2MB QSPI flash      |
 
