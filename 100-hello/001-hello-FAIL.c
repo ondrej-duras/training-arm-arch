@@ -1,6 +1,19 @@
 
+// This program basicaly works.
+// It's about to test toolchain
+// only.
+
+// The result is FAIL ... the emulation is stopped as
+// CPU try to visit addresses out of program
+// becose reset handler has not been set.
+// ... so CPU "fly to space" and emulation is immediately terminated.
+//
+// No worry ... It is expected.
+// Fix continues in 003-hello.c file :-)
+
+
 // training-arm-arch
-// 100-hello.c
+// 100-hello/001-hello.c
 // 2026-09-24 GoogleAI
 //
 int main(void) {

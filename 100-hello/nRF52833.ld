@@ -15,9 +15,18 @@ MEMORY
 
 SECTIONS
 {
-        .text : { *(.text*) } > FLASH /* programm code is placed here */
-        .data : { *(.data*) } > RAM AT > FLASH /* initialized variables */
-        .bss  : { *(.bss*)  } > RAM  /* non-initialized variables */
+        .text : { 
+		  KEEP(*(.vectors*) )  /* instruction to linker "keep a section of vectors as the first" */
+		  *(.text*)             /* programm code is placed here */
+                } > FLASH
+
+        .data : { 
+		  *(.data*)             /* initialized variables */
+                } > RAM AT > FLASH
+
+        .bss  : { 
+		  *(.bss*)              /* non-initialized variables */
+                } > RAM
 }
 /* --- end --- */
 
