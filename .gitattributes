@@ -8,6 +8,7 @@
 
 # Definitively text files 
  *.txt text eol=lf
+ *.hex text eol=lf
  *.s text eol=lf
  *.asm text eol=lf
  *.c text eol=lf
@@ -29,33 +30,53 @@
  *.resc text eol=lf
  *.repl text eol=lf
 
+# Grafika
  *.scad text eol=lf
+ *.svg text eol=lf
+ *.csg text eol=lf
  *.pov text eol=lf
  *.ps text eol=lf
  *.md text eol=lf
  *.htm text eol=lf
  *.html text eol=lf
  *.css text eol=lf
- 
-# # Ensure those won't be messed up with
- *.jpg binary
- *.data binary
- *.pdf binary
- *.pptx binary
- *.docx binary
- *.xlsx binary
- *.gz binary
- *.bz2 binary
+
+# Binarky Executable
  *.dat binary
- *.tar binary
+ *.data binary
+ *.bin binary
  *.exe binary
  *.elf binary
  *.out binary
- *.bin binary
  *.obj binary
  *.so binary
  *.o binary
 
+# NOTEs DOCs
+ *.jpg binary
+ *.vsdx binary
+ *.vsd  binary
+ *.pdf binary
+ *.one binary
+ *.onex binary
+
+# Office
+ *.pptx binary
+ *.docx binary
+ *.xlsx binary
+ *.ppt binary
+ *.doc binary
+ *.xls binary
+
+# Archyves
+ *.gz binary
+ *.bz2 binary
+ *.tar binary
+ *.zip binary
+ *.7z binary
+
+# Default
  * text=auto
+
 # --- end ---
 
