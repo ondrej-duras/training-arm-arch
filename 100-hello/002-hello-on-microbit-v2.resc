@@ -18,7 +18,8 @@ sysbus.ram   Size 0x20000
 
 # 4. Loading .ELF binary /our application
 #sysbus LoadELF @00A-hello-FAIL.elf
-sysbus LoadELF @00C-hello.elf
+#sysbus LoadELF @00C-hello.elf
+sysbus LoadELF @00F-hello-as.elf
 
 # 5. Console setup
 # PC, Opcode alebo PCAndOpcode
