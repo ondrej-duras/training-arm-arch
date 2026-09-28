@@ -9,4 +9,5 @@ This training is AI supported.
 
 [Inventory](inventory.md)\
 [Installation](install.md)
+[Vendor's Documentation](Vendors-Docs/Verndors-Documentation.md)
 

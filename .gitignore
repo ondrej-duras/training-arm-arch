@@ -9,6 +9,10 @@
 *.o
 *.elf
 
+Vendors-Docs/*.pdf
+
+
+##################################################
 # Vagrant stuff
 acceptance_config.yml
 boxes/*
