@@ -1,0 +1,50 @@
+# Emulation of Micro:bit v2.0
+# with application 001-LED-ON.s written in assembly language
+# 20260928, Ondrej DURAS (+GoogleAI) NOKIA Public OpenWare GNU/GPLv2
+
+# 1. creating emulation platform
+using sysbus
+mach create "ubit2-1"
+#machine LoadPlatformDescription @platforms/cpus/nrf52840.repl
+machine loadPlatformDescription $CWD/002-microbit_v2.repl
+
+# following not needed anymore, becose microbit_v2.repl we customized now :-)
+# decreasing memory on fly - chip changes from nRF52840 to nRF52833
+# differences:
+# nRF52833 Flash  512kB Ram 128kB
+#sysbus.flash Size 0x100000
+#sysbus.ram   Size 0x40000
+# nRF52840 Flash 1024kB Ram 256kB
+#sysbus.flash Size 0x80000
+#sysbus.ram   Size 0x20000
+
+# 2. starting WebUI for visualization
+emulation CreateServer "http" 8080
+
+
+# 3. loading application into platfomr FLASH memory
+# sysbu LoadELF @00A-LED-ON.elf
+sysbus LoadHEX @00A-LED-ON.hex
+
+
+# 4. turning ledMatrix visualization ON
+showAnalyzer sysbus.ledMatrix
+
+# 5. Console setup
+# PC, Opcode alebo PCAndOpcode
+# cpu CreateExecutionTracing "tracer" @stdout PC
+# text file where log is going to be written
+#cpu CreateExecutionTracing "tracer" @trace.log PC
+# ... in workspace
+cpu CreateExecutionTracing "tracer" trace.log PC
+
+# names of C functions directly visible in .log file
+sysbus.cpu LogFunctionNames true
+
+# after loading this use command
+# start
+# when you like to stop the simulation , then use command
+# pause
+
+# --- end ---
+

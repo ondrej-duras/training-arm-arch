@@ -1,0 +1,179 @@
+// microbit_v2.repl - micro:bit v2.0 - based on nRF52833 Nordic Semiconductor + LedMatrix5x5
+// -----------------------------------------------------------
+// 20260928, Ondrej DURAS (+GoogleAI) NOKIA Public OpenSource GNU/GPLv2
+// reference : file is derivated from renode.io/platforms/cpus/nrf52840.repl
+// reference : https://docs.nordicsemi.com/r/bundle/ps_nrf52833/
+
+// Changes:
+// As adviced, RAM degraded from 256kB downto 128kB
+// Flash degraded from 1024kB downto 512kB
+// LED diode matrix 5x5 added
+
+// LED MATRIX 5x5 Map:
+// -----------------------------------------------------------
+// Source ROW1 P0 pin 21: -D02>\ -D04>\ -D06>\ -D08>\ -D10>\
+// Source ROW2 P0 pin 22: -D02>\ -D04>\ -D06>\ -D08>\ -D10>\
+// Source ROW3 P0 pin 15: -D02>\ -D04>\ -D06>\ -D08>\ -D10>\
+// Source ROW4 P0 pin 24: -D02>\ -D04>\ -D06>\ -D08>\ -D10>\
+// Source ROW5 P0 pin 19: -D02>\ -D04>\ -D06>\ -D08>\ -D10>\
+// -----------------------------------------------------------
+// .........  on  pins  :  P0/28  P0/11  P0/31  P1/05  P0/30
+// Sink/GND+105ohm .... :  COL1   COL2   COL3   COL4   COL5
+// -----------------------------------------------------------
+// Source (output Log 1 to ON)
+// Sink   (output Log 0 to ON)
+
+// Button A ...... GPIO_0 pin 14   connector P5
+// Button B ...... GPIO_0 pin 23   connector P11
+// Speaker ....... GPIO_0 pin 00   connector N/A
+// Microphone .... GPIO_0 pin 05   connector P6 
+
+nvic: IRQControllers.NVIC @ sysbus 0xE000E000
+    -> cpu@0
+
+cpu: CPU.CortexM @ sysbus
+    cpuType: "cortex-m4"
+    nvic: nvic
+
+uart0: UART.NRF52840_UART @ sysbus 0x40002000
+    easyDMA: true
+    -> nvic@2
+
+uart1: UART.NRF52840_UART @ sysbus 0x40028000
+    easyDMA: true
+    -> nvic@40
+
+rtc0: Timers.NRF52840_RTC @ sysbus 0x4000B000
+    numberOfEvents: 3
+    -> nvic@11
+
+rtc1: Timers.NRF52840_RTC @ sysbus 0x40011000
+    numberOfEvents: 3
+    -> nvic@17
+
+rtc2: Timers.NRF52840_RTC @ sysbus 0x40024000
+    numberOfEvents: 4
+    -> nvic@36
+
+wdt: Timers.NRF52840_Watchdog @ sysbus 0x40010000
+    -> nvic@16
+
+ppi: Miscellaneous.NRF52840_PPI @ sysbus 0x4001F000
+
+
+flash: Memory.MappedMemory @ sysbus 0x0
+//  size: 0x80000  // =  512kB micro:bit-v2
+    size: 0x100000 // = 1024kB on nRF52840 original value
+
+ram: Memory.MappedMemory @ { sysbus 0x800000; sysbus 0x20000000 }
+//  size: 0x20000  // =  128kB on micro:bit-v2
+    size: 0x40000  // =  256kB on nRF52840 original value
+
+clock: Miscellaneous.NRF_CLOCK @ sysbus 0x40000000
+    -> nvic@0
+
+twi0: I2C.NRF52840_I2C @ sysbus 0x40003000
+    -> nvic@0x3
+
+spi2: SPI.NRF52840_SPI @ sysbus 0x40023000
+    -> nvic@0x23
+
+gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
+
+gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
+
+gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
+    port0: gpio0
+    port1: gpio1
+    -> nvic@6
+
+twi1: I2C.NRF52840_I2C @ sysbus 0x40004000
+    -> nvic@4
+
+timer0: Timers.NRF52840_Timer @ sysbus 0x40008000
+    numberOfEvents: 4
+    -> nvic@8
+
+timer1: Timers.NRF52840_Timer @ sysbus 0x40009000
+    numberOfEvents: 4
+    -> nvic@9
+
+timer2: Timers.NRF52840_Timer @ sysbus 0x4000A000
+    numberOfEvents: 4
+    -> nvic@10
+
+timer3: Timers.NRF52840_Timer @ sysbus 0x4001A000
+    numberOfEvents: 6
+    -> nvic@26
+
+timer4: Timers.NRF52840_Timer @ sysbus 0x4001B000
+    numberOfEvents: 6
+    -> nvic@27
+
+i2s: Sound.NRF52840_I2S @ sysbus 0x40025000
+    -> nvic@37
+
+pdm: Sound.NRF52840_PDM @ sysbus 0x4001D000
+    -> nvic@29
+
+radio: Wireless.NRF52840_Radio @ sysbus 0x40001000
+    -> nvic@1
+
+rng: Miscellaneous.NRF52840_RNG @ sysbus 0x4000D000
+    -> nvic@13
+
+ecb: Miscellaneous.NRF52840_ECB @ sysbus 0x4000E000
+    -> nvic@14
+
+egu0 : Miscellaneous.NRF52840_EGU @ sysbus 0x40014000
+    -> nvic@20
+
+egu1 : Miscellaneous.NRF52840_EGU @ sysbus 0x40015000
+    -> nvic@21
+    
+egu2 : Miscellaneous.NRF52840_EGU @ sysbus 0x40016000
+    -> nvic@22
+
+egu3 : Miscellaneous.NRF52840_EGU @ sysbus 0x40017000
+    -> nvic@23
+
+egu4 : Miscellaneous.NRF52840_EGU @ sysbus 0x40018000
+    -> nvic@24
+
+egu5 : Miscellaneous.NRF52840_EGU @ sysbus 0x40019000
+    -> nvic@25
+
+sysbus:
+    init:
+        ApplySVD @https://dl.antmicro.com/projects/renode/svd/NRF52840.svd.gz
+        Tag <0x10000000, 0x10000FFF> "FICR"
+        Tag <0x100000a0, 0x100000a3> "DEVICEADDRTYPE" 0x1 # random address
+        Tag <0x100000a4, 0x100000a7> "DEVICEADDR[0]" 0xAABBCCDD
+        Tag <0x10001200, 0x10001203> "PSELRESET"
+
+
+// 1. LEDmatrix as a standalone object definition
+ledMatrix: Video.MicrobitLEDMatrix @ sysbus
+    // GPIO pins, providing source (+3.3V) on each row, if pin is output and logical value is set to 1-One.
+    rows:      [ gpio0 21, gpio0 22, gpio0 15, gpio0 24, gpio0 19 ]
+    
+    // GPIO pins, providing Sink (via rezistors 105Ohms connected to ground) if mode is output and value is set to 0-Zero.
+    columns:   [ gpio0 28, gpio0 11, gpio0 31, gpio1 05, gpio0 30 ]
+
+// 2. Maping pins of GPIO port/s directy to Renode microbitLED Matrix object inputs
+gpio0:
+    21 -> ledMatrix@0
+    22 -> ledMatrix@1
+    15 -> ledMatrix@2
+    24 -> ledMatrix@3
+    19 -> ledMatrix@4
+    28 -> ledMatrix@5
+    11 -> ledMatrix@6
+    31 -> ledMatrix@7
+    30 -> ledMatrix@9
+
+gpio1:
+    05 -> ledMatrix@8
+
+// --- end ---
+

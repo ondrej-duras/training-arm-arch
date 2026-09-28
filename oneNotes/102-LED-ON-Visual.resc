@@ -1,0 +1,17 @@
+# Renode Script
+# Visualization of micro:bit LED matrics
+
+# Načítanie micro:bit v2 platformy
+mach create "microbit-v2"
+machine LoadPlatformDescription @platforms/cpus/nrf52833.repl
+
+# Zapnutie zabudovaného webserveru pre GUI (vykreslí micro:bit displej)
+emulation CreateServer "http" 8080
+
+# Nahraj tvoj skompilovaný .elf assembler kód
+sysbus LoadELF @101-gpio/led_top_left.elf
+
+# Otvor okno s grafickou vizualizáciou periférii
+showAnalyzer sysbus.gpio0.ledMatrix
+
+# --- end ---

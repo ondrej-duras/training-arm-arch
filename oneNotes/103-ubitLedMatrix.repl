@@ -1,0 +1,26 @@
+
+
+// 1. Zadefinujeme samotný objekt matice
+ledMatrix: Video.MicrobitLEDMatrix @ sysbus
+    // Týmto povieme, ktoré GPIO piny ovládajú riadky (Rows)
+    // Na nRF52840 je riadok ROW1 pre micro:bit v2 mapovaný na pin P0.21
+    rows:      [ gpio0 21, gpio0 22, gpio0 15, gpio0 24, gpio0 19 ]
+    
+    // Týmto povieme, ktoré GPIO piny ovládajú st¿pce (Columns)
+    // St¿pec COL1 je mapovaný na pin P0.28
+    columns:   [ gpio0 28, gpio0 11, gpio0 31, gpio0 05, gpio0 30 ]
+
+// 2. Prepojíme signály z GPIO portu priamo do matice, 
+// aby Renode vedel, ¿e zmena pinu má rozsvieti¿ LED bodku
+gpio0:
+    21 -> ledMatrix@0
+    22 -> ledMatrix@1
+    15 -> ledMatrix@2
+    24 -> ledMatrix@3
+    19 -> ledMatrix@4
+    28 -> ledMatrix@5
+    11 -> ledMatrix@6
+    31 -> ledMatrix@7
+    05 -> ledMatrix@8
+    30 -> ledMatrix@9
+

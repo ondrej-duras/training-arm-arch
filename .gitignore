@@ -5,11 +5,16 @@
 *.gz
 .*
 
-# object fnd executable iles
+# object fnd executable files
 *.o
 *.elf
 
+# Vendor's Documentation is toooooo big for GIT
+# ... related .md files keep updated/commited, but no .pdf
 Vendors-Docs/*.pdf
+
+# troubleshooting .log file also may be toooooooo long
+*.log
 
 
 ##################################################
