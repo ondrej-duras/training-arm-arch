@@ -153,27 +153,36 @@ sysbus:
 
 
 // 1. LEDmatrix as a standalone object definition
-ledMatrix: Video.MicrobitLEDMatrix @ sysbus
-    // GPIO pins, providing source (+3.3V) on each row, if pin is output and logical value is set to 1-One.
-    rows:      [ gpio0 21, gpio0 22, gpio0 15, gpio0 24, gpio0 19 ]
-    
-    // GPIO pins, providing Sink (via rezistors 105Ohms connected to ground) if mode is output and value is set to 0-Zero.
-    columns:   [ gpio0 28, gpio0 11, gpio0 31, gpio1 05, gpio0 30 ]
+ledmatrix: Video.LEDMatrix @ sysbus
+    width: 5
+    height: 5
+    rows:
+        - gpio0 21
+        - gpio0 22
+        - gpio0 15
+        - gpio0 24
+        - gpio0 19
+    columns:
+        - gpio0 28
+        - gpio0 11
+        - gpio0 31
+        - gpio0 37
+        - gpio0 30
 
 // 2. Maping pins of GPIO port/s directy to Renode microbitLED Matrix object inputs
 gpio0:
-    21 -> ledMatrix@0
-    22 -> ledMatrix@1
-    15 -> ledMatrix@2
-    24 -> ledMatrix@3
-    19 -> ledMatrix@4
-    28 -> ledMatrix@5
-    11 -> ledMatrix@6
-    31 -> ledMatrix@7
-    30 -> ledMatrix@9
+    21 -> ledmatrix@0
+    22 -> ledmatrix@1
+    15 -> ledmatrix@2
+    24 -> ledmatrix@3
+    19 -> ledmatrix@4
+    28 -> ledmatrix@5
+    11 -> ledmatrix@6
+    31 -> ledmatrix@7
+    30 -> ledmatrix@9
 
 gpio1:
-    05 -> ledMatrix@8
+    05 -> ledmatrix@8
 
 // --- end ---
 
