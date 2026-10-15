@@ -78,14 +78,14 @@ twi0: I2C.NRF52840_I2C @ sysbus 0x40003000
 spi2: SPI.NRF52840_SPI @ sysbus 0x40023000
     -> nvic@0x23
 
-gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
-
-gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
-
-gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
-    port0: gpio0
-    port1: gpio1
-    -> nvic@6
+//gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
+//
+//gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
+//
+//gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
+//    port0: gpio0
+//    port1: gpio1
+//    -> nvic@6
 
 twi1: I2C.NRF52840_I2C @ sysbus 0x40004000
     -> nvic@4
@@ -152,37 +152,28 @@ sysbus:
         Tag <0x10001200, 0x10001203> "PSELRESET"
 
 
-// 1. LEDmatrix as a standalone object definition
-ledmatrix: Video.LEDMatrix @ sysbus
-    width: 5
-    height: 5
-//    rows:
-//        - gpio0 21
-//        - gpio0 22
-//        - gpio0 15
-//        - gpio0 24
-//        - gpio0 19
-//    columns:
-//        - gpio0 28
-//        - gpio0 11
-//        - gpio0 31
-//        - gpio0 37
-//        - gpio0 30
+led_r1_c1: Miscellaneous.LED @ sysbus
 
-// 2. Maping pins of GPIO port/s directy to Renode microbitLED Matrix object inputs
-gpio0:
-    21 -> ledmatrix@0,
-    22 -> ledmatrix@1,
-    15 -> ledmatrix@2,
-    24 -> ledmatrix@3,
-    19 -> ledmatrix@4,
-    28 -> ledmatrix@5,
-    11 -> ledmatrix@6,
-    31 -> ledmatrix@7,
-    30 -> ledmatrix@9
+gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
+    21 -> led_r1_c1@0
 
-gpio1:
-    05 -> ledmatrix@8
+//    21 -> ledmatrix@0
+//    22 -> ledmatrix@1
+//    15 -> ledmatrix@2
+//    24 -> ledmatrix@3
+//    19 -> ledmatrix@4
+//    28 -> ledmatrix@5
+//    11 -> ledmatrix@6
+//    31 -> ledmatrix@7
+//    30 -> ledmatrix@9
+
+gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
+//    05 -> ledmatrix@8
+
+gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
+    port0: gpio0
+    port1: gpio1
+    -> nvic@6
 
 // --- end ---
 
