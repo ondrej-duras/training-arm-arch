@@ -33,7 +33,7 @@ run:  00A-LED-ON.hex 003-LED-ON.resc 002-microbit_v2.repl
 	renode 003-LED-ON.resc
 
 runa: 00A-LED-ON.hex 003-LED-ON.resc 002-microbit_v2.repl
-	c:/opt/renode/bin/Renode.exe 003-LED-ON.resc
+	c:/opt/Renode/Renode.exe 003-LED-ON.resc
 
 clean:
 	echo "removing all non-commitable files and binaries"

@@ -6,7 +6,13 @@
 using sysbus
 mach create "ubit2-1"
 #machine LoadPlatformDescription @platforms/cpus/nrf52840.repl
-machine loadPlatformDescription $CWD/002-microbit_v2.repl
+machine LoadPlatformDescription $CWD/002-microbit_v2.repl
+
+
+# 3. loading application into platfomr FLASH memory
+# sysbu LoadELF @00A-LED-ON.elf
+sysbus LoadHEX @00A-LED-ON.hex
+
 
 # following not needed anymore, becose microbit_v2.repl we customized now :-)
 # decreasing memory on fly - chip changes from nRF52840 to nRF52833
@@ -20,12 +26,6 @@ machine loadPlatformDescription $CWD/002-microbit_v2.repl
 
 # 2. starting WebUI for visualization
 emulation CreateServer "http" 8080
-
-
-# 3. loading application into platfomr FLASH memory
-# sysbu LoadELF @00A-LED-ON.elf
-sysbus LoadHEX @00A-LED-ON.hex
-
 
 # 4. turning ledMatrix visualization ON
 showAnalyzer sysbus.ledMatrix

@@ -156,29 +156,29 @@ sysbus:
 ledmatrix: Video.LEDMatrix @ sysbus
     width: 5
     height: 5
-    rows:
-        - gpio0 21
-        - gpio0 22
-        - gpio0 15
-        - gpio0 24
-        - gpio0 19
-    columns:
-        - gpio0 28
-        - gpio0 11
-        - gpio0 31
-        - gpio0 37
-        - gpio0 30
+//    rows:
+//        - gpio0 21
+//        - gpio0 22
+//        - gpio0 15
+//        - gpio0 24
+//        - gpio0 19
+//    columns:
+//        - gpio0 28
+//        - gpio0 11
+//        - gpio0 31
+//        - gpio0 37
+//        - gpio0 30
 
 // 2. Maping pins of GPIO port/s directy to Renode microbitLED Matrix object inputs
 gpio0:
-    21 -> ledmatrix@0
-    22 -> ledmatrix@1
-    15 -> ledmatrix@2
-    24 -> ledmatrix@3
-    19 -> ledmatrix@4
-    28 -> ledmatrix@5
-    11 -> ledmatrix@6
-    31 -> ledmatrix@7
+    21 -> ledmatrix@0,
+    22 -> ledmatrix@1,
+    15 -> ledmatrix@2,
+    24 -> ledmatrix@3,
+    19 -> ledmatrix@4,
+    28 -> ledmatrix@5,
+    11 -> ledmatrix@6,
+    31 -> ledmatrix@7,
     30 -> ledmatrix@9
 
 gpio1:
