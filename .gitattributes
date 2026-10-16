@@ -40,6 +40,7 @@
  *.htm text eol=lf
  *.html text eol=lf
  *.css text eol=lf
+ *.md text eol=lf
 
 # Binarky Executable
  *.dat binary
