@@ -6,7 +6,13 @@
 using sysbus
 mach create "ubit2-1"
 #machine LoadPlatformDescription @platforms/cpus/nrf52840.repl
-machine loadPlatformDescription $CWD/002-microbit_v2.repl
+machine LoadPlatformDescription $CWD/002-microbit_v2.repl
+
+
+# 3. loading application into platfomr FLASH memory
+# sysbu LoadELF @00A-LED-ON.elf
+sysbus LoadHEX @00A-LED-ON.hex
+
 
 # following not needed anymore, becose microbit_v2.repl we customized now :-)
 # decreasing memory on fly - chip changes from nRF52840 to nRF52833
@@ -19,16 +25,16 @@ machine loadPlatformDescription $CWD/002-microbit_v2.repl
 #sysbus.ram   Size 0x20000
 
 # 2. starting WebUI for visualization
-emulation CreateServer "http" 8080
-
-
-# 3. loading application into platfomr FLASH memory
-# sysbu LoadELF @00A-LED-ON.elf
-sysbus LoadHEX @00A-LED-ON.hex
-
+#emulation CreateServer "http" 8080
 
 # 4. turning ledMatrix visualization ON
-showAnalyzer sysbus.ledMatrix
+#showAnalyzer sysbus.ledMatrix
+#showAnalyzer led_r1_c1
+# showAnalyzer pre diodu neni
+logLevel -1 led_r1_c1
+
+# a tu sledovanie aj pre pristupy ku GPIO
+sysbus LogPeripheralAccess gpio0 true
 
 # 5. Console setup
 # PC, Opcode alebo PCAndOpcode
@@ -36,7 +42,7 @@ showAnalyzer sysbus.ledMatrix
 # text file where log is going to be written
 #cpu CreateExecutionTracing "tracer" @trace.log PC
 # ... in workspace
-cpu CreateExecutionTracing "tracer" trace.log PC
+sysbus.cpu CreateExecutionTracing "tracer" @trace.log PC
 
 # names of C functions directly visible in .log file
 sysbus.cpu LogFunctionNames true

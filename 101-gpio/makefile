@@ -7,6 +7,11 @@ LD = arm-none-eabi-ld
 AS = arm-none-eabi-as
 OC = arm-none-eabi-objcopy
 
+#RN = renode
+#RN = c:/opt/Renode/Renode.exe
+RN = c:/opt/renode/bin/Renode.exe
+
+
 # build parameters
 CFLAGS = -mcpu=cortex-m4 -mthumb -O0 -g
 LDFLAGS = --nostartfiles --specs=nosys.specs
@@ -30,10 +35,7 @@ all: 00A-LED-ON.hex
 	$(OC) -O ihex 00C-LED-ON.elf 00A-LED-ON.hex 
 
 run:  00A-LED-ON.hex 003-LED-ON.resc 002-microbit_v2.repl
-	renode 003-LED-ON.resc
-
-runa: 00A-LED-ON.hex 003-LED-ON.resc 002-microbit_v2.repl
-	c:/opt/renode/bin/Renode.exe 003-LED-ON.resc
+	$(RN) 003-LED-ON.resc
 
 clean:
 	echo "removing all non-commitable files and binaries"

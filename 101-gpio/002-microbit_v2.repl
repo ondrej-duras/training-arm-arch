@@ -78,14 +78,14 @@ twi0: I2C.NRF52840_I2C @ sysbus 0x40003000
 spi2: SPI.NRF52840_SPI @ sysbus 0x40023000
     -> nvic@0x23
 
-gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
-
-gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
-
-gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
-    port0: gpio0
-    port1: gpio1
-    -> nvic@6
+//gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
+//
+//gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
+//
+//gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
+//    port0: gpio0
+//    port1: gpio1
+//    -> nvic@6
 
 twi1: I2C.NRF52840_I2C @ sysbus 0x40004000
     -> nvic@4
@@ -153,23 +153,23 @@ sysbus:
 
 
 // 1. LEDmatrix as a standalone object definition
-ledmatrix: Video.LEDMatrix @ sysbus
-    width: 5
-    height: 5
-    connections:
-        // Tu povieš Renode, ktoré piny patria riadkom (anódam)
-        0 -> gpio0@21
-        1 -> gpio0@22
-        2 -> gpio0@15
-        3 -> gpio0@24
-        4 -> gpio0@19
-        // A ktoré piny patria stĺpcom (katódam)
-        5 -> gpio0@28
-        6 -> gpio0@11
-        7 -> gpio0@31
-        8 -> gpio1@05
-        9 -> gpio0@30
-
+//ledmatrix: Video.LEDMatrix @ sysbus
+//    width: 5
+//    height: 5
+//    connections:
+//        // Tu povieš Renode, ktoré piny patria riadkom (anódam)
+//        0 -> gpio0@21
+//        1 -> gpio0@22
+//        2 -> gpio0@15
+//        3 -> gpio0@24
+//        4 -> gpio0@19
+//        // A ktoré piny patria stĺpcom (katódam)
+//        5 -> gpio0@28
+//        6 -> gpio0@11
+//        7 -> gpio0@31
+//        8 -> gpio1@05
+//        9 -> gpio0@30
+//
 // 2. Maping pins of GPIO port/s directy to Renode microbitLED Matrix object inputs
 //gpio0:
 //    21 -> ledmatrix@0
@@ -184,6 +184,18 @@ ledmatrix: Video.LEDMatrix @ sysbus
 //
 //gpio1:
 //    05 -> ledmatrix@8
+
+led_r1_c1: Miscellaneous.LED @ sysbus
+
+gpio0: GPIOPort.NRF52840_GPIO @ sysbus 0x50000500
+    21 -> led_r1_c1@0
+
+gpio1: GPIOPort.NRF52840_GPIO @ sysbus 0x50000800
+
+gpiote: GPIOPort.NRF52840_GPIOTasksEvents @ sysbus 0x40006000
+    port0: gpio0
+    port1: gpio1
+    -> nvic@6
 
 // --- end ---
 
