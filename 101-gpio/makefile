@@ -9,7 +9,7 @@ OC = arm-none-eabi-objcopy
 
 #RN = renode
 #RN = c:/opt/Renode/Renode.exe
-RN = c:/opt/renode/bin/Renode.exe
+RN = c:/opt/renode/bin/Renode.exe --console
 
 
 # build parameters

@@ -15,7 +15,7 @@ Vendors-Docs/*.pdf
 
 # troubleshooting .log file also may be toooooooo long
 *.log
-
+*.log*
 
 ##################################################
 # Vagrant stuff

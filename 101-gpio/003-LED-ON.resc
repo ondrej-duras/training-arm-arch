@@ -42,7 +42,7 @@ sysbus LogPeripheralAccess gpio0 true
 # text file where log is going to be written
 #cpu CreateExecutionTracing "tracer" @trace.log PC
 # ... in workspace
-sysbus.cpu CreateExecutionTracing "tracer" @trace.log PC
+sysbus.cpu CreateExecutionTracing "tracer" $CWD/trace.log PC
 
 # names of C functions directly visible in .log file
 sysbus.cpu LogFunctionNames true
