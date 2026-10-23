@@ -4,12 +4,23 @@
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-ld
 AS = arm-none-eabi-as
+EM = c:/opt/renode16/bin/Renode.exe
+#EM = c:/opt/renode17/Renode.exe
 
 CFLAGS  = -mcpu=cortex-m4 -mthumb -O0 -g
 LDFLAGS = --nostartfiles --specs=nosys.specs
 MEMDEF  = nRF52833.ld
 
 help:
+	echo "ARM toolchain is installed via"
+	echo "winget install -e --id=Arm.GnuArmEmbeddedToolchain =i -l c:\opt\arm"
+	echo "Renode (site builds.renode.io or renode.io)"
+	echo "version 1.16 has been installed via" 
+	echo "winget install -e --id=Renode.Renode -i -l c:\opt\renode16"
+	echo "version 1.17 has been installed via UNZIP"
+	echo "wget https://builds.renode.io/renode-1.17.0+20261023git8056b03eb.windows-portable.zip"
+	echo "7z x "renode-1.17.0+20261023git8056b03eb.windows-portable.zip" -oc:\opt\renode17\"
+	echo "---"
 	echo "make all ....... build all bin"
 	echo "make clean ..... delete all non-git bin files"
 	echo "make run ....... start emulation of C/S example see .resc"
@@ -37,10 +48,7 @@ all: 00A-hello-FAIL.elf  00C-hello.elf  00F-hello-as.elf
 	$(LD) -T $(MEMDEF) 00E-hello-as.o -o 00F-hello-as.elf
 
 run: 00F-hello-as.elf
-	renode 002-hello-on-microbit-v2.resc
-
-run_opt: 00F-hello-as.elf
-	c:/opt/renode/bin/Renode.exe 002-hello-on-microbit-v2.resc
+	$(EM) 002-hello-on-microbit-v2.resc
 
 # housekeeping - all files not going into git repository may be deleted.
 clean:
