@@ -1,0 +1,30 @@
+
+// BBC micro:bit v2 Platform Description for Renode
+
+//using "platforms/cpus/nrf52833.repl"
+using "platforms/cpus/nrf52840.repl"
+
+// Define micro:bit specific peripheral overlays on top of the nRF52833 SoC
+
+// 3: buttonA -> gpio0@3
+//26: buttonB -> gpio0@26
+//gpio0:
+//    buttonA  -> gpio0@3
+//    buttonB -> gpio0@26
+//
+//buttonA: Button @ gpio0 3
+//    invert: true
+//
+//buttonB: Button @ gpio0 26
+//    invert: true
+
+// Example Mapping of the 5x5 LED Matrix Grid (Using GPIO Pins)
+ledMatrix: Visualizers.KWMatrixLED @ sysbus
+    rows: 5
+    columns: 5
+    // Connect pins to matching rows/cols based on schematic configuration
+    // (Actual row/col pinouts depend on the micro:bit hardware revision)
+
+uart0:
+    txPin: 6
+    rxPin: 40 // P1.00 = GPIO pin 40

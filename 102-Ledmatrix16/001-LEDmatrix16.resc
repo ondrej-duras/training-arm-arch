@@ -1,0 +1,33 @@
+
+# Inicializácia stroja
+using sysbus
+mach create "microbit"
+
+# Na¿ítanie repl súboru (architektúra nRF52840, ktorú pou¿ívame ako základ)
+# hruby chip
+#machine LoadPlatformDescription @platforms/cpus/nrf52840.repl
+#upraveny profil pre micro:bit
+#machine LoadPlatformDescription @platforms/boards/microbit_v2.repl
+machine LoadPlatformDescription $CWD/microbit_v2.repl
+
+# --- TU JE TEN TRIK PRE WEB GUI ---
+# Renode v1.16 podporuje vytvorenie weboveho panelu pre konkretne periferie.
+# Povolime emulaciu zabudovaneho displeja a tlacidiel micro:bitu:
+
+showAnalyzer sysbus.gpio0
+showAnalyzer sysbus.gpio1
+
+# Spustenie zabudovaného webserveru pre GUI (standardne na porte 8080)
+# V prehliadaci potom otvoris http://localhost:8080
+emulation CreateWebserver 8080
+
+# Natanie tvojho skompilovaného programu (predpokladajme názov gpio.elf)
+# sysbus LoadELF @gpio.elf
+sysbus LoadHEX @00a-LED-ON.hex
+
+# Nastavenie po¿iato¿ných registrov (ak to nerobí reset vektor stopercentne)
+cpu PC 0x0
+cpu SP 0x20004000
+
+# Spustenie simulácie
+start

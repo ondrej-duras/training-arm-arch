@@ -9,11 +9,11 @@
 .equ GPIO_P0_BASE,  0x50000000
 
 @ Registre pre konfiguráciu pinov (PIN_CNF)
-@ Ka¿dý pin má svoj 32-bitový register na adrese: BASE + 0x700 + (pin * 4)
+@ Kazdy pin ma svoj 32-bitovy register na adrese: BASE + 0x700 + (pin * 4)
 .equ P0_21_CNF,     (0x700 + (21 * 4)) @ ROW1
 .equ P0_28_CNF,     (0x700 + (28 * 4)) @ COL1
 
-@ Registre pre zápis na port (posuny od GPIO_P0_BASE)
+@ Registre pre zapis na port (posuny od GPIO_P0_BASE)
 .equ GPIO_OUTSET,   0x508  @ Nastaví bity na 1
 .equ GPIO_OUTCLR,   0x50C  @ Nastaví bity na 0
 
@@ -29,14 +29,14 @@
 Reset_Handler:
     LDR     R0, =GPIO_P0_BASE
 
-    @ 1. Konfigurácia pinu P0.21 (ROW1) ako VÝSTUP (hodnota 1 v PIN_CNF)
+    @ 1. Konfiguracia pinu P0.21 (ROW1) ako VySTUP (hodnota 1 v PIN_CNF)
     MOVS    R1, #1
     STR     R1, [R0, #P0_21_CNF]
 
-    @ 2. Konfigurácia pinu P0.28 (COL1) ako VÝSTUP (hodnota 1 v PIN_CNF)
+    @ 2. Konfiguracia pinu P0.28 (COL1) ako VySTUP (hodnota 1 v PIN_CNF)
     STR     R1, [R0, #P0_28_CNF]
 
-    @ 3. Zhasnutie st¿pca COL1 (Pin 28 stiahneme na 0 cez OUTCLR register)
+    @ 3. Zhasnutie stlpca COL1 (Pin 28 stiahneme na 0 cez OUTCLR register)
     LDR     R2, =(1 << 28)
     STR     R2, [R0, #GPIO_OUTCLR]
 
@@ -45,7 +45,7 @@ Reset_Handler:
     STR     R3, [R0, #GPIO_OUTSET]
 
 _infinite_loop:
-    B       _infinite_loop   @ Dr¿íme CPU v chode, LED stále svieti
+    B       _infinite_loop   @ Drzime CPU v chode, LED stale svieti
 
 @ --- end ---
 

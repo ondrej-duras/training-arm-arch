@@ -1,0 +1,20 @@
+
+# 1. OTVORENIE VSTUPU: Renode bude počúvať na TCP porte 12345 pre príkazy z Pythonu
+emulation CreateServer "monitor" 12345 True
+
+# 2. NASTAVENIE VÝSTUPU: Hook pre zmenu stavu pinu 21 (napr. LED).
+# Pri každej zmene pošle UDP packet na port 5005 v tvare "LED:1" alebo "LED:0"
+sysbus.gpio0.pin21 CreateGPIOHook "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); msg = 'LED:1' if state else 'LED:0'; s.sendto(msg, ('127.0.0.1', 5005))"
+
++-----------------------------------+             +----------------------------------+
+|          RENODE EMULÁTOR          |             |   TVOJ EXTERNÝ PROGRAM (GUI)     |
+|                                   |             |   (Python / Tkinter / Pygame...) |
+|  [GPIO LED] --(UDP Packet 5005)-------------->  |  Prijme "LED21:True"             |
+|                                   |             |  -> Rozsvieti kruh na obrazovke  |
+|                                   |             |                                  |
+|  [GPIO Button] <--(TCP Port 12345)------------  |  Klikneš na gombík A             |
+|                                   |             |  -> Pošle "sysbus.gpio0... True" |
++-----------------------------------+             +----------------------------------+
+
+# --- end ---
+
